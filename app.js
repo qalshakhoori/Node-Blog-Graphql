@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const { graphqlHTTP } = require('express-graphql');
 
+const auth = require('./middleware/auth');
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolvers = require('./graphql/resolvers');
 
@@ -53,6 +54,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use(auth);
 
 app.use(
   '/graphql',
